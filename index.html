@@ -176,7 +176,6 @@
         </p>
       </div>
       <div class="map-shell" data-reveal>
-        <!-- Embedded Google Maps with your new coordinates -->
         <iframe
           title="خريطة موقع ليلة الحناء"
           src="https://www.google.com/maps?q=34.026402,-4.981881&z=16&output=embed"
@@ -228,7 +227,11 @@
     </section>
   </main>
   
-  <!-- Bumped version token to break older browser cache -->
-  <script src="script.js?v=4"></script>
+  <!-- تحديد تاريخ التوقيت المستهدف لليلة الحناء لمكافحة تعارض الملفات -->
+  <script>
+    window.countdownTargetDate = new Date('2026-08-18T17:00:00+01:00').getTime();
+  </script>
+  <!-- تفعيل الاصدار السادس لكسر التخزين المؤقت (Cache Busting) -->
+  <script src="script.js?v=6"></script>
 </body>
 </html>
