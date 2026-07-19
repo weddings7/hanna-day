@@ -176,7 +176,6 @@
         </p>
       </div>
       <div class="map-shell" data-reveal>
-        <!-- Embedded Google Maps mapping to your injected short URL -->
         <iframe
           title="خريطة موقع ليلة الحناء"
           src="https://www.google.com/maps?q=https://maps.app.goo.gl/ZYHt8cwCkMyJGJm1A&output=embed"
@@ -228,11 +227,39 @@
     </section>
   </main>
   
-  <!-- تحديد تاريخ التوقيت المستهدف لليلة الحناء لمكافحة تعارض الملفات -->
   <script>
     window.countdownTargetDate = new Date('2026-08-18T17:00:00+01:00').getTime();
+
+    // كود مدمج لضمان إظهار الأقسام فور التمرير دون الاعتماد الكامل على الملف الخارجي
+    document.addEventListener("DOMContentLoaded", function() {
+      const revealElements = document.querySelectorAll("[data-reveal]");
+      
+      function checkReveal() {
+        const triggerBottom = window.innerHeight * 0.85;
+        revealElements.forEach(el => {
+          const boxTop = el.getBoundingClientRect().top;
+          if(boxTop < triggerBottom) {
+            el.classList.add("active");
+            // في حال لم يتم تعريف الأنيكيشن في الـ CSS الخاص بك، نضمن ظهورها بـ opacity مباشر
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+          }
+        });
+      }
+      
+      // تهيئة العناصر لتفادي الاختفاء الدائم
+      revealElements.forEach(el => {
+        el.style.transition = "all 1s ease";
+        if (!el.classList.contains("active")) {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(40px)";
+        }
+      });
+
+      window.addEventListener("scroll", checkReveal);
+      checkReveal(); // تشغيل فحص أولي
+    });
   </script>
-  <!-- تفعيل الاصدار السادس لكسر التخزين المؤقت (Cache Busting) -->
   <script src="script.js?v=6"></script>
 </body>
 </html>
